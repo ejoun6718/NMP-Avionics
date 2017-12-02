@@ -18,10 +18,10 @@ with open('test.txt') as file:
 plt.figure(1)
 plt.plot(intervals, altitude)
 plt.ylabel('Altitude')
-plt.xlabel('Time')
+plt.xlabel('Time(Seconds)')
 
 plt.figure(2)
 plt.plot(intervals, speed)
 plt.ylabel('Speed')
-plt.xlabel('Time')
+plt.xlabel('Time(Seconds)')
 plt.show()
