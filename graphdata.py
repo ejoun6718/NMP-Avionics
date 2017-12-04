@@ -1,4 +1,16 @@
 import matplotlib.pyplot as plt
+import serial
+
+filename = "data.txt"
+
+ser = serial.Serial('dev/cu.usbmodemFA131 (Arduino/Genuino Uno)', 9600);
+f = open(filename, "w")
+
+while True:
+        x = ser.readline()
+        f.write(x)
+f.close()
+
 
 altitude = []
 speed = []
