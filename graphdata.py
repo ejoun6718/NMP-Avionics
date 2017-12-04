@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import serial
 
-filename = "data.txt"
+filename = 'data.txt'
 
 ser = serial.Serial('dev/cu.usbmodemFA131 (Arduino/Genuino Uno)', 9600);
 f = open(filename, "w")
@@ -16,7 +16,7 @@ altitude = []
 speed = []
 intervals = []
 i = 0
-with open('test.txt') as file:
+with open(filename) as file:
         for line in file:
                 newAltitude, newSpeed = line.split()
                 altitude.append(newAltitude)
