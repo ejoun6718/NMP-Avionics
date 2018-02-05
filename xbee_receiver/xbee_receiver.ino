@@ -14,6 +14,7 @@ Hardware Hookup:
 *****************************************************************/
 // We'll use SoftwareSerial to communicate with the XBee:
 #include <SoftwareSerial.h>
+
 // XBee's DOUT (TX) is connected to pin 2 (Arduino's Software RX)
 // XBee's DIN (RX) is connected to pin 3 (Arduino's Software TX)
 SoftwareSerial XBee(2, 3); // RX, TX for Sparkfun Shield
@@ -32,10 +33,8 @@ void loop()
   if(XBee.available() > 0){
     char c = XBee.read();
 
-    //receiver receives newline and carriage return, don't print anything
-    if(c == "\n" || c == "\r" ){}
-
-    else{
+    // If receiver receives newline or carriage return, don't print anything
+    if(c != "\n" && c != "\r" ){
       Serial.print(c);
     }
   }

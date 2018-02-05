@@ -35,6 +35,14 @@ void setup() {
 // Interrupt is called once a millisecond, looks for any new GPS data, and stores it
 SIGNAL(TIMER0_COMPA_vect) {
   char c = GPS.read();
+  // if you want to debug, this is a good time to do it!
+  //uncomment if you want to see the NMEA GPS messages
+  //#ifdef UDR0
+  //  if (GPSECHO)
+  //    if (c) UDR0 = c;  
+  //    // writing direct to UDR0 is much much faster than Serial.print 
+  //    // but only one character can be written at a time. 
+  //#endif
 }
 
 void useInterrupt(boolean v) {
@@ -53,7 +61,6 @@ void useInterrupt(boolean v) {
 
 uint32_t timer = millis();
 
-//int i = 1;
 void loop() {
   // put your main code here, to run repeatedly:
 
@@ -84,14 +91,45 @@ void loop() {
   // approximately every 2 seconds or so, print out the current stats
   if (millis() - timer > 2000) { 
     timer = millis(); // reset the timer
+    
+//    Serial.print("\nTime: ");
+//    Serial.print(GPS.hour, DEC); Serial.print(':');
+//    Serial.print(GPS.minute, DEC); Serial.print(':');
+//    Serial.print(GPS.seconds, DEC); Serial.print('.');
+//    Serial.println(GPS.milliseconds);
+//    Serial.print("Date: ");
+//    Serial.print(GPS.day, DEC); Serial.print('/');
+//    Serial.print(GPS.month, DEC); Serial.print("/20");
+//    Serial.println(GPS.year, DEC);
+//    Serial.print("Fix: "); Serial.print((int)GPS.fix);
+//    Serial.print(" quality: "); Serial.println((int)GPS.fixquality); 
+//    Serial.print("Fix: "); 
     Serial.print((int)GPS.fix);
     Serial.print("\t"); 
+//    Serial.print(" quality: "); 
     Serial.println((int)GPS.fixquality); 
    
     if (GPS.fix) {
+//      Serial.print("Location: ");
+//      Serial.print(GPS.latitude, 4); Serial.print(GPS.lat);
+//      Serial.print(", "); 
+//      Serial.print(GPS.longitude, 4); Serial.println(GPS.lon);
+//      Serial.print("Location (in degrees, works with Google Maps): ");
+//      Serial.print(GPS.latitudeDegrees, 4);
+//      Serial.print(", "); 
+//      Serial.println(GPS.longitudeDegrees, 4);
+      
+//      Serial.print("Speed (knots): "); 
       Serial.print(GPS.speed);
+//      Serial.print("Angle: "); Serial.println(GPS.angle);
+//      Serial.print("Altitude: "); 
       Serial.print("\t");
       Serial.println(GPS.altitude);
+      //Serial.print("\t");
+     // Serial.println("z");
+//      Serial.print("Satellites: "); Serial.println((int)GPS.satellites);
     }
+    //Serial.println("z"); //delimiter to indicate end of message
+    //Serial.print("\t");
   }
 }
